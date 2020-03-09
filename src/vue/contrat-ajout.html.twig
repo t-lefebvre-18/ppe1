@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Ajout d'un contrat {% endblock %}
+{% block contenu %}
+
+{% if form.valide is defined %}
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">Ajout réussie</h1>
+       <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contrat" class="violet">Retourner sur la liste des contrat</a></h1>
+    {% else %}
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1>
+    {% endif %}
+{% else %}
+
+<div class="panel-body">
+  <form class="form-signin" action="index.php?page=contratajout" method="post" enctype="application/x-www-form-urlencoded">
+    <h1 class="h3 mb-3 font-weight-normal">ajouter un contrat</h1>
+    <div class="form-group">
+      <!-- <label for="email">Mot de passe</label> -->
+      <input type="text" class="form-control" id="libelle" name="libelle" placeholder="libelle" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="nom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="dureeContrat" name="dureeContrat" placeholder="dureeContrat" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="prenom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="budgetNegocie" name="budgetNegocie" placeholder="budgetNegocie" value="" required>
+    </div>
+                 <div class="form-group">
+        <label for="idEntreprise">Nom Entreprise</label>
+  <select class="form-control" id="idEntreprise" name="idEntreprise">
+
+         {% for e in liste %}
+              <option value="{{ e.id }}" >{{ e.libelleEnt }}</option>
+         {% endfor %}
+  </select>
+</div>
+  <br>
+  
+    <button type="submit" class="btn btn-lg btn-purple btn-block" name="btAjouter">Ajouter</button>
+  </form>
+
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Ajout d'un contrat {% endblock %}
+{% block contenu %}
+
+{% if form.valide is defined %}
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">Ajout réussie</h1>
+       <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=entreprise" class="violet">Retourner sur la liste des entreprises</a></h1>
+    {% else %}
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1>
+    {% endif %}
+{% else %}
+
+<div class="panel-body">
+  <form class="form-signin" action="index.php?page=entrepriseajout" method="post" enctype="application/x-www-form-urlencoded">
+    <h1 class="h3 mb-3 font-weight-normal">ajouter une entreprise</h1>
+            <input type="hidden" id="id" name="id" value="{{form.entreprise.id}}"/>
+      <div class="form-group">
+      <!-- <label for="email">Mot de passe</label> -->
+      <input type="text" class="form-control" id="libelleEnt" name="libelleEnt" placeholder="libelleEnt" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="email">Mot de passe</label> -->
+      <input type="text" class="form-control" id="nomEnt" name="nomEnt" placeholder="nomEnt" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="nom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="villeEnt" name="villeEnt" placeholder="villeEnt" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="prenom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="adrEnt" name="adrEnt" placeholder="adrEnt" value="" required>
+    </div>
+     <div class="form-group">
+      <!-- <label for="prenom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="numEnt" name="numEnt" placeholder="numEnt" value="" required>
+    </div>
+      <div class="form-group">
+      <!-- <label for="prenom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="faxEnt" name="faxEnt" placeholder="faxEnt" value="" required>
+    </div>
+      <div class="form-group">
+      <!-- <label for="prenom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="cpEnt" name="cpEnt" placeholder="cpEnt" value="" required>
+    </div>
+      <div class="form-group">
+      <!-- <label for="prenom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="paysEnt" name="paysEnt" placeholder="paysEnt" value="" required>
+    </div>
+                  <div class="form-group">
+        <label for="emailContact">Nom du contact</label>
+  <select class="form-control" id="emailContact" name="emailContact">
+    {% if form.entreprise.emailContact == NULL %}
+         <option value="NULL" selected>contact non identifié</option>
+         {% for c in listec %}
+              <option value="{{ c.email }}" >{{ c.email }}</option>
+         {% endfor %}
+    {% else %}
+    {% for c in listec %}
+
+      {% if c.email == form.entreprise.emailContact %}
+         <option value="{{ c.email }}" selected>{{ c.email }}</option>
+        {% else %}
+         <option value="{{ c.email }}">{{ e.email }}</option>
+        {% endif %}
+    {% endfor %}
+         <option value="NULL">contact non identifié</option>
+    {% endif %}
+
+  </select>
+</div>
+  <br>
+    <button type="submit" class="btn btn-lg btn-purple btn-block" name="btAjouter">Ajouter</button>
+  </form>
+    
+
+</div>
+{% endif %}
+{% endblock %}

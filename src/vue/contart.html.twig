@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+  - Gestion des contrat
+{% endblock %}
+
+{% block contenu %}
+
+  <div class="textcenter">
+    <h1 class="text-purple">
+      Gestion des contrat
+    </h1>
+
+  </div>
+
+  {% if form.valide is defined %}
+    {% if form.valide == true %}
+      <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+    {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+    {% endif %}
+  {% endif %}
+  <a class="btn btn-purple" href="index.php?page=contratajout" role="button">Ajouter un contrat</a>
+    <div class="table-responsive">
+      <br>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Intitulé du contrat</th>
+            <th scope="col">Durée du contrat</th>
+            <th scope="col">Budget négocié</th>
+            <th scope="col">Entreprise</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </thead>
+        <tfoot class="thead-light">
+          <tr>
+            <th scope="col">Intitulé du contrat</th>
+            <th scope="col">Durée du contrat</th>
+            <th scope="col">Budget négocié</th>
+            <th scope="col">Entreprise</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for c in liste %}
+            <tr>
+              <td scope="row" class="text-maj">{{c.libelle}}</td>
+              <td>{{c.dureeContrat}}</td>
+              <td>{{c.budgetNegocie}}€</td>
+              <td>{{c.libelleEnt}}</td>
+              <td>
+                <a href="index.php?page=contratmodif&id={{c.id}}">
+                  <i class="fas fa-pen"></i>
+                </a>
+              </td>
+              <td>
+                <a href="index.php?page=contrat&id={{c.id}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% else %}
+            <tr class="textcenter">
+              <th scope="row" colspan="6">La table contrat ne contien aucune valeur.</th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+{% endblock %}

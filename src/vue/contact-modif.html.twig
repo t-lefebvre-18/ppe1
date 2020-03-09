@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Modifier un utilisateur {% endblock %}
+
+{% block contenu %}
+
+{% if form.contact is defined %}
+    {% if form.contact != null %}
+    <form class="form-signin" action="index.php?page=contactmodif" method="post" enctype="application/x-www-form-urlencoded">
+      <h1 class="h3 mb-3 font-weight-normal">Modifier un contact</h1>
+      <div class="form-group">
+        <!-- <label for="nom">Mot de passe</label> -->
+        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="{{form.contact.nom}}" required>
+      </div>
+      <div class="form-group">
+        <!-- <label for="prenom">Mot de passe</label> -->
+        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="{{form.contact.prenom}}" required>
+      </div>
+      <div class="form-group">
+        <!-- <label for="num">Mot de passe</label> -->
+        <input type="text" class="form-control" id="num" name="num" placeholder="num" value="{{form.contact.num}}" required>
+      </div>
+
+
+      <div class="form-group">
+
+</div>
+    <br>
+      <input type="hidden" name="email" value="{{ form.contact.email }}"/>
+      <button type="submit" class="btn btn-lg btn-purple btn-block" name="btModifier">Modifier</button>
+    </form>
+
+    {% else %}
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+       <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contact" class="violet">Retourner sur la liste des contacts</a></h1>
+    {% endif %}
+
+{% else %}
+     {% if form.valide == true %}
+         <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+         <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contact" class="violet">Retourner sur la liste des contacts</a></h1>
+     {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+      <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contact" class="violet">Retourner sur la liste des contacts</a></h1>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

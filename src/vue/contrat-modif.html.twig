@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Modifier une entreprise {% endblock %}
+
+{% block contenu %}
+
+{% if form.contrat is defined %}
+    {% if form.contrat != null %}
+    <form class="form-signin" action="index.php?page=contratmodif" method="post" enctype="application/x-www-form-urlencoded">
+      <h1 class="h3 mb-3 font-weight-normal">Modifier un contrat</h1>
+
+      <input type="hidden" id="id" name="id" value="{{form.contrat.id}}"/>
+      <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="libelle">libelle</label>
+            <input type="text" class="form-control" id="libelle" name="libelle" value="{{form.contrat.libelle}}">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="dureeContrat">dureeContrat </label>
+            <input type="text" class="form-control" id="dureeContrat" name="dureeContrat" value="{{form.contrat.dureeContrat}}">
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="budgetNegocie">budgetNegocie</label>
+            <input type="text" class="form-control" id="budgetNegocie" name="budgetNegocie" value="{{form.contrat.dureeContrat}}">
+          </div>
+        </div>
+           <div class="form-group">
+        <label for="idEntreprise">Nom du contact</label>
+  <select class="form-control" id="idEntreprise" name="idEntreprise">
+
+    {% for e in listeE %}
+
+      {% if e.id == form.contrat.idEntreprise %}
+         <option value="{{ c.id }}" selected>{{ e.libelleEnt }} </option>
+        {% else %}
+         <option value="{{ e.id }}">{{ e.libelleEnt }}</option>
+        {% endif %}
+    {% endfor %}
+  
+
+
+  </select>
+</div>
+    <br>
+
+      <input type="hidden" name="email" value="{{ form.contrat.id }}"/>
+      <button type="submit" class="btn btn-lg btn-purple btn-block" name="btModifier">Modifier</button>
+    </form>
+
+    {% else %}
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+       <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contrat" class="violet">Retourner sur la liste des contrats</a></h1>
+    {% endif %}
+
+{% else %}
+     {% if form.valide == true %}
+         <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+         <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contrat" class="violet">Retourner sur la liste des contrats</a></h1>
+     {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+      <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contrat" class="violet">Retourner sur la liste des contrats</a></h1>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    {% block style %}{% endblock %}
+    <title>{% block title %}Simpléduc - Gestion des projets{% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark navbar-dark bg-purple shadow">
+      <div class="container">
+      <a class="navbar-brand" href="index.php">
+        <img alt="Brand" src="images/logo.png" class="img-circle shadow" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item {% block activeAccueil %}{% endblock %}"><a class="nav-link" href="index.php">Accueil</a></li>
+          {% if session.login is defined %}
+            {% if session.role == 1 %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+              <div class="dropdown-menu dropdown-menu-lg-left shadow" aria-labelledby="navbarDropdown">
+                <h6 class="dropdown-header">Utilisateurs</h6>
+                <a class="dropdown-item " href="index.php?page=utilisateur"><i class="fas fa-user mr-3"></i>Gestion des utilisateurs</a>
+                <!-- <a class="dropdown-item " href="index.php?page=competence"><i class="fas fa-clipboard-list mr-3"></i>Gestion des Competences</a> -->
+                <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Equipes</h6>
+                <a class="dropdown-item " href="index.php?page=equipe"><i class="fas fa-users mr-3"></i>Gestion des équipes</a>
+                <a class="dropdown-item " href="index.php?page=developpeur"><i class="fas fa-chalkboard-teacher mr-3"></i>Gestion des Développeurs</a>
+                <!-- <a class="dropdown-item " href="index.php?page=responsable"><i class="fas fa-user-check mr-3"></i>Gestion des résponsables</a> -->
+                <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Projet</h6>
+                <!-- <a class="dropdown-item " href="index.php?page=projet"><i class="fas fa-project-diagram mr-3"></i>Gestion des Projets</a> -->
+                <a class="dropdown-item " href="index.php?page=module"><i class="fas fa-digital-tachograph mr-3"></i>Gestion des Modules</a>
+                <a class="dropdown-item " href="index.php?page=tache"><i class="fas fa-digital-tachograph mr-3"></i>Gestion des Tache</a>
+                <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Entreprise</h6>
+                <a class="dropdown-item " href="index.php?page=entreprise"><i class="fas fa-briefcase mr-3"></i>Gestion des Entreprises</a>
+                <a class="dropdown-item " href="index.php?page=contact"><i class="fas fa-user-tie mr-3"></i>Gestion des Contacts</a>
+                <a class="dropdown-item " href="index.php?page=contrat"><i class="fas fa-file-contract mr-3"></i>Gestion des Contrat</a>
+
+
+              </div>
+            </li>
+            {% endif %}
+          {% endif %}
+          <li class="nav-item {% block activePropos %}{% endblock %}"><a class="nav-link " href="index.php?page=apropos">À propos</a></li>
+          <li class="nav-item {% block activeMention %}{% endblock %}"><a class="nav-link" href="index.php?page=mentions">Mentions légales</a></li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+        {% if session.login is defined %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{session.login}}</a>
+            <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="navbarDropdown">
+              <h6 class="dropdown-header">Profile</h6>
+              <a class="dropdown-item " href="index.php?page=utilisateurmodif&id={{session.login}}"><i class="fas fa-pen mr-3"></i>Gestion du profile</a>
+              <!-- <div class="dropdown-divider"></div> -->
+              <a class="dropdown-item " href="index.php?page=deconnexion"><i class="fas fa-sign-out-alt mr-3"></i>Déconnexion</a>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      </div>
+    </nav>
+    <div class="page">
+    {% block contenu %}
+
+
+    {% endblock %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  </body>
+</html>

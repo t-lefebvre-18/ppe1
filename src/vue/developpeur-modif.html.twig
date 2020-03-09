@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Modifier un developpeur {% endblock %}
+
+{% block contenu %}
+
+{% if form.developpeur is defined %}
+    {% if form.developpeur != null %}
+    <form class="form-signin" action="index.php?page=developpeurmodif" method="post" enctype="application/x-www-form-urlencoded">
+      <h1 class="h3 mb-3 font-weight-normal">Modifier un developpeur</h1>
+      <div class="form-row">
+          <div class="form-group col-md-4">
+            <label >Nom du Développeur : {{form.developpeur.nom}}</label>
+
+
+          </div>
+          <div class="form-group col-md-4">
+            <label >Prénom du Développeur : {{form.developpeur.prenom}}</label>
+
+          </div>
+          <div class="form-group col-md-4">
+            <label >Email du Développeur : {{form.developpeur.email}}</label>
+
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="numDev">Numéro</label>
+            <input type="text" class="form-control" id="numDev" name="numDev" value="{{form.developpeur.numDev}}">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="adrDev">Adresse</label>
+            <input type="text" class="form-control" id="adrDev" name="adrDev" value="{{form.developpeur.adrDev}}">
+          </div>
+
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="villeDev">Ville</label>
+            <input type="text" class="form-control" id="villeDev" name="villeDev" value="{{form.developpeur.villeDev}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="paysDev">Pays</label>
+            <input type="text" class="form-control" id="paysDev" name="paysDev" value="{{form.developpeur.paysDev}}">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="cpDev">Code Postal</label>
+            <input type="text" class="form-control" id="cpDev" name="cpDev" value="{{form.developpeur.cpDev}}">
+          </div>
+        </div>
+      <div class="form-group">
+        <label for="idEquipe">Nom d'equipe</label>
+  <!-- <label for="role"></label> -->
+  <select class="form-control" id="idEquipe" name="idEquipe">
+    {% if form.developpeur.idEquipe == NULL %}
+         <option value="NULL" selected>Equipe non identifié</option>
+         {% for e in listeEquipe %}
+              <option value="{{ e.id }}" >{{ e.libelle }}</option>
+         {% endfor %}
+    {% else %}
+    {% for e in listeEquipe %}
+        {% if e.id == form.developpeur.idEquipe %}
+         <option value="{{ e.id }}" selected>{{ e.libelle }}</option>
+        {% else %}
+         <option value="{{ e.id }}" >{{ e.libelle }}</option>
+        {% endif %}
+    {% endfor %}
+         <option value="NULL">Equipe non identifiés</option>
+    {% endif %}
+
+  </select>
+</div>
+    <br>
+      <input type="hidden" name="id" value="{{ form.developpeur.id }}"/>
+      <button type="submit" class="btn btn-lg btn-purple btn-block" name="btModifier">Modifier</button>
+    </form>
+
+    {% else %}
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+       <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=developpeur" class="violet">Retourner sur la liste des utilisateurs</a></h1>
+    {% endif %}
+
+{% else %}
+     {% if form.valide == true %}
+         <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+         <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=developpeur" class="violet">Retourner sur la liste des utilisateurs</a></h1>
+     {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+      <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=developpeur" class="violet">Retourner sur la liste des utilisateurs</a></h1>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

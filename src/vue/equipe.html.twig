@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+  - Gestion des équipes
+{% endblock %}
+
+{% block contenu %}
+
+  <div class="textcenter">
+    <h1 class="text-purple">
+      Gestion des équipes
+    </h1>
+    <p>[<span style="background-color: rgba(255, 0, 0, .5);color: rgba(0, 0, 0, .0); ">______</span>] 	&#8594;  équipe sans responsable &#160;&#160;&#160;&#160;&#160; [<span style="background-color: rgba(0, 255, 0, .5); color: rgba(0, 0, 0, .0); ">______</span>] 	&#8594; équipe avec un responsable </p>
+
+  </div>
+
+  {% if form.valide is defined %}
+    {% if form.valide == true %}
+      <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+    {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+    {% endif %}
+  {% endif %}
+    <a class="btn btn-purple" href="index.php?page=equipeajout" role="button">Ajouter une équipe</a>
+    <div class="table-responsive">
+      <br>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Libellé</th>
+            <th scope="col">Responsable</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </thead>
+        <tfoot class="thead-light">
+          <tr>
+            <th scope="col">Libellé</th>
+            <th scope="col">Responsable</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for e in liste %}
+          {% if e.idresponsable == Null %}
+          <tr style="background-color: rgba(255, 0, 0, .1);">
+          {% else %}
+          <tr style="background-color: rgba(0, 255, 0, .1);">
+          {% endif %}
+
+              <th scope="row">{{e.libelle}}</th>
+              {% if e.idresponsable != NULL %}
+              <td> <span class="text-maj">{{e.nom}}</span>
+                {{e.prenom}}</td>
+                {% else %}
+                <td> Pas de Responsable </td>
+                {% endif %}
+
+              <td>
+                <a href="index.php?page=equipemodif&id={{e.id}}">
+                  <i class="fas fa-pen"></i>
+                </a>
+              </td>
+              <td>
+                <a href="index.php?page=equipe&id={{e.id}}"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+          {% else %}
+            <tr class="textcenter">
+              <th scope="row" colspan="4">La table équipes ne contien aucune valeur.</th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+{% endblock %}

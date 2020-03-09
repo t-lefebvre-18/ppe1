@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Ajout d'une équipe {% endblock %}
+{% block contenu %}
+
+{% if form.valide is defined %}
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">Ajout réussie</h1>
+    {% else %}
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1>
+    {% endif %}
+{% else %}
+
+<div class="panel-body">
+  <form class="form-signin" action="index.php?page=contactajout" method="post" enctype="application/x-www-form-urlencoded">
+    <h1 class="h3 mb-3 font-weight-normal">ajouter un contact</h1>
+    <div class="form-group">
+      <!-- <label for="email">Mot de passe</label> -->
+      <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="nom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="prenom">Mot de passe</label> -->
+      <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="" required>
+    </div>
+    <div class="form-group">
+      <!-- <label for="num">Mot de passe</label> -->
+      <input type="text" class="form-control" id="num" name="num" placeholder="num" value="" required>
+    </div>
+  <br>
+    <button type="submit" class="btn btn-lg btn-purple btn-block" name="btAjouter">Ajouter</button>
+  </form>
+
+</div>
+{% endif %}
+{% endblock %}

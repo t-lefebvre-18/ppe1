@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Modifier une entreprise {% endblock %}
+
+{% block contenu %}
+
+{% if form.entreprise is defined %}
+    {% if form.entreprise != null %}
+    <form class="form-signin" action="index.php?page=entreprisemodif" method="post" enctype="application/x-www-form-urlencoded">
+      <h1 class="h3 mb-3 font-weight-normal">Modifier une entreprise</h1>
+
+      <input type="hidden" id="id" name="id" value="{{form.entreprise.id}}"/>
+      <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="libelleEnt">libelleEnt</label>
+            <input type="text" class="form-control" id="libelleEnt" name="libelleEnt" value="{{form.entreprise.libelleEnt}}">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="faxEnt">faxEnt</label>
+            <input type="text" class="form-control" id="faxEnt" name="faxEnt" value="{{form.entreprise.faxEnt}}">
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="numEnt">numEnt</label>
+            <input type="text" class="form-control" id="numEnt" name="numEnt" value="{{form.entreprise.numEnt}}">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="adrEnt">adrEnt</label>
+            <input type="text" class="form-control" id="adrEnt" name="adrEnt" value="{{form.entreprise.adrEnt}}">
+          </div>
+
+        </div>
+          
+          <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="villeEnt">villeEnt</label>
+            <input type="text" class="form-control" id="villeEnt" name="villeEnt" value="{{form.entreprise.villeEnt}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="paysEnt">paysEnt</label>
+            <input type="text" class="form-control" id="paysEnt" name="paysEnt" value="{{form.entreprise.paysEnt}}">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="cpEnt">Code Postal</label>
+            <input type="text" class="form-control" id="cpEnt" name="cpEnt" value="{{form.entreprise.cpEnt}}">
+          </div>
+        </div>
+           <div class="form-group">
+        <label for="emailContact">Nom du contact</label>
+  <select class="form-control" id="emailContact" name="emailContact">
+    {% if form.entreprise.emailContact == NULL %}
+         <option value="NULL" selected>contact non identifié</option>
+         {% for c in listec %}
+              <option value="{{ c.email }}" >{{ c.email }}</option>
+         {% endfor %}
+    {% else %}
+    {% for c in listec %}
+
+      {% if c.email == form.entreprise.emailContact %}
+         <option value="{{ c.email }}" selected>{{ c.email }}</option>
+        {% else %}
+         <option value="{{ c.email }}">{{ e.email }}</option>
+        {% endif %}
+    {% endfor %}
+         <option value="NULL">contact non identifié</option>
+    {% endif %}
+
+  </select>
+</div>
+    <br>
+
+      <input type="hidden" name="email" value="{{ form.entreprise.id }}"/>
+      <button type="submit" class="btn btn-lg btn-purple btn-block" name="btModifier">Modifier</button>
+    </form>
+
+    {% else %}
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+       <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=entreprise" class="violet">Retourner sur la liste des entreprise</a></h1>
+    {% endif %}
+
+{% else %}
+     {% if form.valide == true %}
+         <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+         <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=entreprise" class="violet">Retourner sur la liste des entreprise</a></h1>
+     {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+      <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=entreprise" class="violet">Retourner sur la liste des entreprise</a></h1>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

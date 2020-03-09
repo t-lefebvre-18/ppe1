@@ -1,0 +1,100 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+  - Gestion des developpeur
+{% endblock %}
+
+{% block contenu %}
+<div class="textcenter">
+  <h1 class="text-purple">
+    Gestion des developpeur
+  </h1>
+  <p>[<span style="background-color: rgba(255, 0, 0, .5);color: rgba(0, 0, 0, .0); ">______</span>] 	&#8594;  Dévelopeur sans équipe &#160;&#160;&#160;&#160;&#160; [<span style="background-color: rgba(0, 255, 0, .5); color: rgba(0, 0, 0, .0); ">______</span>] 	&#8594; Dévelopeur avec une équipe </p>
+
+</div>
+
+
+  {% if form.valide is defined %}
+    {% if form.valide == true %}
+      <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+    {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+    {% endif %}
+  {% endif %}
+
+    <div class="table-responsive">
+      <br>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Pays</th>
+            <th scope="col">Code Postal</th>
+            <th scope="col">Equipe</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </thead>
+        <tfoot class="thead-light">
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Pays</th>
+            <th scope="col">Code Postal</th>
+            <th scope="col">Equipe</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for d in liste %}
+          {% if d.idEquipe == Null %}
+          <tr style="background-color: rgba(255, 0, 0, .1);">
+          {% else %}
+          <tr style="background-color: rgba(0, 255, 0, .1);">
+          {% endif %}
+
+              <td scope="row" class="text-maj">{{d.nom}}</td>
+              <td>{{d.prenom}}</td>
+              <td>{{d.email}}</td>
+              <td>{{d.numDev}}</td>
+              <td>{{d.adrDev}}</td>
+              <td>{{d.villeDev}}</td>
+              <td>{{d.paysDev}}</td>
+              <td>{{d.cpDev}}</td>
+              {% if d.idEquipe == Null %}
+              <td>Aucune</td>
+              {% else %}
+              <td>{{d.libelle}}</td>
+              {% endif %}
+              <td>
+                <a href="index.php?page=developpeurmodif&id={{d.id}}">
+                  <i class="fas fa-pen"></i>
+                </a>
+              </td>
+              <td>
+                <a href="index.php?page=utilisateur&id={{u.email}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% else %}
+            <tr class="textcenter">
+              <th scope="row" colspan="4">La table équipes ne contien aucune valeur.</th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Modification d'une tache {% endblock %}
+
+{% block contenu %} <h1> Modification d'une tâche</h1>
+
+{% if form.tache is defined %}
+    {% if form.tache != null %}
+        <div class="panel-body">
+        <form  class="form-signin" action="index.php?page=tachemodif" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" id="id" name="id" value="{{form.tache.id}}"/>
+
+                         <label for="inputLibelle">Libellé:</label>
+         <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Saisir un Nombre D'heures" id="inputLibelle" name="inputLibelle" value="{{form.tache.libelle}}">
+  
+</div>
+         
+                 <label for="inputNbHeure">Nombre D'heures:</label>
+         <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Saisir un Nombre D'heures" id="inputNbHeure" name="inputNbHeure" value="{{form.tache.nbHeure}}" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <span class="input-group-text" id="basic-addon2">Heure</span>
+  </div>
+</div>
+         
+         <label for="inputCoupTache">Coût Tâche:</label>
+         <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Saisir un Nombre D'heures" id="inputCoupTache" name="inputCoupTache" value="{{form.tache.coupTache}}" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <span class="input-group-text" id="basic-addon2">€</span>
+  </div>
+</div>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Ajouter</button>
+        </form>
+        </div>
+    {% else %}
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=tache" class="violet">Retourner sur la liste des Tâches</a></h1>
+        {% else %}
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=tache" class="violet">Retourner sur la liste des Tâches</a></h1>
+        {% endif %}
+    {% endif %}
+{% else %}
+     <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+     <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=tache" class="violet">Retourner sur la liste des Tâches</a></h1>
+
+{% endif %}
+{% endblock %}

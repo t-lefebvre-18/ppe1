@@ -1,0 +1,198 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Modification d'une équipe {% endblock %}
+
+{% block contenu %} <h1> Modification d'une équipe </h1>
+
+    {% if form.equipe is defined %}
+        {% if form.equipe != null %}
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=equipemodif" method="post" id="formtest" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" id="id" name="id" value="{{form.equipe.id}}"/>
+                    <label for="inputDesignation" class="sr-only">Libellé:</label>
+
+                    <input type="text" id="inputLibelle" name="inputLibelle" class="form-control" placeholder="Saisir un libellé" value="{{form.equipe.libelle}}" required autofocus>
+                    <label for="inputIdResponsable" class="sr-only">Responsable:</label>
+                    <select name="inputIdResponsable" class="form-control">
+                        {% if form.equipe.idresponsable == NULL %}
+                            <option value="non" selected>Responsable non identifié</option>
+                            {% for r in listeR %}
+                                <option value="{{ r.idDevloppeur }}">{{ r.nom }} {{ r.prenom }}</option>
+                            {% endfor %}
+                        {% else %}
+                            {% for r in listeR %}
+                                {% if form.equipe.id == form.equipe.idEquipe %}
+                                    <option value="{{ r.idDevloppeur }}" selected>{{ r.nom }} {{ r.prenom }} </option>
+                                {% else %}
+                                    <option value="{{ r.idDevloppeur }}">{{ r.nom }} {{ r.prenom }}</option>
+                                {% endif %}
+                            {% endfor %}
+                            <option value="non">Responsable non identifiés</option>
+                        {% endif %}
+
+                    </select>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="table-responsive" id="DevOut">
+                                <br>
+                                <table class="table table-bordered">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Developpeur disponible</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot class="thead-light">
+                                        <tr>
+                                            <th scope="col">Developpeur disponible</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr style="background-color: rgba(111, 66, 193, .2);">
+                                            <th scope="row" class="row-check">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" onclick="cocherOut(this.checked)" value="Tout cocher" id="Tout cocher">
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                        Tout cocher
+                                                    </label>
+                                                </div></th>
+                                        </tr>
+                                        {% for d in listeD %}
+
+
+                                            {% if d.idEquipe == NULL %}
+                                                <tr>
+                                                    <th scope="row" class="row-check">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="{{ d.email }}" id="{{ d.email }}">
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                {{ d.nom }} {{ d.prenom }}
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            {% endif %}
+
+
+
+
+                                        {% else %}
+
+                                            <tr class="textcenter">
+                                                <th scope="row" colspan="1">La table équipes ne contien aucune valeur.</th>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr style="background-color: rgba(111, 66, 193, .2);">
+                                            <th scope="row" class="row-check">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" onclick="cocherOut(this.checked)" value="Tout cocher" id="Tout cocher">
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                        Tout cocher
+                                                    </label>
+                                                </div></th>
+
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="table-responsive" id="DevIn">
+                                <br>
+                                <table class="table table-bordered">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Developpeur de l'equipe</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot class="thead-light">
+                                        <tr>
+                                            <th scope="col">Developpeur de l'equipe</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr style="background-color: rgba(111, 66, 193, .2);">
+                                            <th scope="row" class="row-check">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" onclick="cocherIn(this.checked)" value="Tout cocher" id="Tout cocher">
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                        Tout cocher
+                                                    </label>
+                                                </div></th>
+                                        </tr>
+                                        {% for d in listeD %}
+
+                                            {% if d.idEquipe == form.equipe.id %}
+                                                <tr>
+                                                    <th scope="row" class="row-check">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="{{ d.email }}" id="{{ d.email }}">
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                                {{ d.nom }} {{ d.prenom }}
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            {% endif %}
+
+
+
+                                        {% else %}
+
+                                            <tr class="textcenter">
+                                                <th scope="row" colspan="1">La table équipes ne contien aucune valeur.</th>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr style="background-color: rgba(111, 66, 193, .2);">
+                                            <th scope="row" class="row-check">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" onclick="cocherIn(this.checked)" value="Tout cocher" id="Tout cocher">
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                        Tout cocher
+                                                    </label>
+                                                </div></th>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-lg btn-purple btn-block" type="submit" name="btModifier">Ajouter</button>
+                </form>
+            </div>
+        {% else %}
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=equipe" class="violet">Retourner sur la liste des équipes</a></h1>
+            {% else %}
+                <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=equipe" class="violet">Retourner sur la liste des équipes</a></h1>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=equipe" class="violet">Retourner sur la liste des équipes</a></h1>
+
+    {% endif %}
+    <script>
+        function cocherIn(etat) {
+            var inputs = document.getElementById('DevIn').getElementsByTagName('input');
+            for (i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == 'checkbox')
+                    inputs[i].checked = etat;
+            }
+        }
+        function cocherOut(etat) {
+            var inputs = document.getElementById('DevOut').getElementsByTagName('input');
+            for (i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == 'checkbox')
+                    inputs[i].checked = etat;
+            }
+        }
+
+    </script>
+{% endblock %}

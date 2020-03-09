@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+  - Gestion des contact
+{% endblock %}
+
+{% block contenu %}
+
+  <div class="textcenter">
+    <h1 class="text-purple">
+      Gestion des contact
+    </h1>
+
+  </div>
+
+  {% if form.valide is defined %}
+    {% if form.valide == true %}
+      <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+    {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+    {% endif %}
+  {% endif %}
+  <a class="btn btn-purple" href="index.php?page=contactajout" role="button">Ajouter un contact</a>
+    <div class="table-responsive">
+      <br>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </thead>
+        <tfoot class="thead-light">
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for c in liste %}
+            <tr>
+              <td scope="row" class="text-maj">{{c.nom}}</td>
+              <td>{{c.prenom}}</td>
+              <td>{{c.email}}</td>
+              <td>{{c.num}}</td>
+              <td>
+                <a href="index.php?page=contactmodif&email={{c.email}}">
+                  <i class="fas fa-pen"></i>
+                </a>
+              </td>
+              <td>
+                <a href="index.php?page=contact&email={{c.email}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% else %}
+            <tr class="textcenter">
+              <th scope="row" colspan="6">La table contact ne contien aucune valeur.</th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,384 @@
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.form-check {
+	position: relative; /* permet de positionner la checkbox cachée */
+}
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+	/* Cache la checkbox sans
+	   la désactiver pour les
+	   lecteurs d'écran */
+	position: absolute;
+	left: 1.9em;
+	opacity: 0.01;
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* on prépare le label */
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+	position: relative; /* permet de positionner les pseudo-éléments */
+	padding-left: 1.3em; /* fait un peu d'espace pour notre case à venir */
+	font-size: 1.05em; /* Label un peu plus gros */
+	line-height: 1.7;
+}
+/* Aspect de la case */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+	content: '';
+	position: absolute;
+	left: -1rem;
+	top: 0;
+	width: 1.4em;
+	height: 1.4em;
+	border: 1px solid #aaa;
+	background: #FFF;
+	border-radius: .2em;
+	box-shadow: inset 0 1px 3px rgba(0,0,0, .1), 0 0 0 rgba(203, 34, 237, .2);
+	transition: all .275s;
+}
+/* Aspect de la coche */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+	content: '✓';
+	position: absolute;
+	top: .40em;
+	left: -0.55em;
+	font-size: 1.6em;
+	color: var(--purple);
+	line-height: 0;
+	transition: all .2s; /* Petite transition */
+}
+/* Aspect non cochée */
+[type="checkbox"]:not(:checked) + label:after {
+	opacity: 0;
+	transform: scale(0) rotate(45deg);
+}
+
+/* Aspect cochée */
+[type="checkbox"]:checked + label:after {
+	opacity: 1;
+	transform: scale(1) rotate(0);
+}
+/* Aspect cochée */
+[type="checkbox"]:checked + .form-check-label {
+color: var(--purple);
+}
+/* Aspect cochée */
+[type="checkbox"]:not(:checked) + .form-check-label {
+color: var(--gray);
+}
+
+
+
+body{
+  background-color: var(--light);
+
+}
+a {
+  color: var(--purple);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #5c37a1;
+  text-decoration: underline;
+}
+
+table>tbody>tr {
+  color: var(--gray);
+}
+
+.page{
+  margin: 1em
+}
+
+.text-maj{
+  text-transform: uppercase !important;
+}
+.btn-purple {
+  color: var(--purple);
+  background-color: transparent;
+  border: 2px solid var(--purple)
+}
+
+.btn-purple:hover {
+  color: #fff;
+  background-color: #5c37a1;
+  border-color: #5c37a1;
+}
+
+.btn-purple:focus, .btn-purple.focus {
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5);
+}
+
+.btn-purple.disabled, .btn-purple:disabled {
+  color: #fff;
+  background-color: var(--purple);
+  border-color: var(--purple);
+}
+
+.btn-purple:not(:disabled):not(.disabled):active, .btn-purple:not(:disabled):not(.disabled).active,
+.show > .btn-purple.dropdown-toggle {
+  color: #fff;
+  background-color: #5c37a1;
+  border-color: #5c37a1;
+}
+
+.btn-purple:not(:disabled):not(.disabled):active:focus, .btn-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-purple.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5);
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: var(--purple);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5);
+}
+
+.textcenter{
+  text-align: center;
+}
+.bg-purple {
+  background-color: var(--purple);
+}
+
+.navbar {
+  min-height: 50px;
+  margin-bottom: 4em;
+  padding: 0;
+}
+
+.navbar .navbar-nav>li>a {
+  color: #fff;
+  padding-bottom: .15rem;
+  transition: .2s;
+  margin: 0 2px;
+}
+
+.navbar .navbar-nav>li>a:hover,
+.navbar .navbar-nav>li>a:focus {
+  text-decoration: underline;
+}
+
+.navbar .navbar-nav>.active>a,
+.navbar .navbar-nav>.active>a:hover,
+.navbar .navbar-nav>.active>a:focus {
+  color: #FFF;
+  text-decoration: underline;
+  padding-bottom: .15rem;
+}
+
+.navbar .navbar-nav>.open>a,
+.navbar .navbar-nav>.open>a:hover,
+.navbar .navbar-nav>.open>a:focus {
+  color: #FFF;
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse {
+    margin-top: 50px;
+    margin-left: 1em;
+    margin-bottom: 1em
+  }
+}
+
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+.shadow{
+  box-shadow: 0px 0px 10px rgba(0,0,0,.2);
+}
+
+.card {
+  border: none;
+}
+.dropdown-menu {
+  border: none;
+}
+
+.center {
+  display: flex;
+  position:relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-purple{
+  color: var(--purple);
+}
+/*
+.panel-heading {
+  padding: 10px
+}
+.blanc{
+  color: #FFF;
+}
+
+.background-violet{
+    background-color: var(--purple);
+    color: #FFF;
+}
+
+
+
+.violet{
+  color: var(--purple);
+}
+
+h1 {
+  text-align: center;
+  color: var(--purple);
+}
+
+.h3 {
+  text-align: center;
+  color: var(--purple);
+}
+
+.btn-lg{
+   background-color: transparent;
+   border: 2px solid var(--purple);
+   color: var(--purple);
+}
+.btn-lg:hover{
+   background-color: var(--purple);
+   border: 2px solid var(--purple);
+   color: #FFF;
+}
+
+
+
+.navbar-default {
+    background-color: var(--purple);
+    border-color: var(--purple);
+}
+
+
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: var(--purple);
+}
+
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+    background: linear-gradient(-90deg, rgba(111, 66, 193,0), rgba(111, 66, 193,0) 100%),
+              linear-gradient(90deg, rgba(111, 66, 193,0), rgba(111, 66, 193,0) 100%),
+              linear-gradient(0deg, rgba(255, 255, 255,0), rgba(102, 16, 242,0) 100%);
+    border-bottom: 2px solid transparent;
+      padding-bottom: .15rem;
+      transition: .2s;
+      margin: 0 2px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  background: linear-gradient(-90deg, rgba(111, 66, 193,1), rgba(111, 66, 193,0) 100%),
+            linear-gradient(90deg, rgba(111, 66, 193,1), rgba(111, 66, 193,0) 100%),
+            linear-gradient(0deg, rgba(255, 255, 255,1), rgba(102, 16, 242,0) 100%);
+
+  border-bottom: 2px solid #FFF;
+    padding-bottom: .15rem;
+    color: #FFF;
+}
+
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFF;
+    background-color: var(--purple);
+    border-bottom: 2px solid #FFF;
+      padding-bottom: .15rem;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #FFF;
+    background-color: var(--purple);
+}
+
+
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+
+
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: var(--purple);
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #3d3d3d;
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse {
+    margin-top: 50px;
+}
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+          color: #333;
+    }
+} */

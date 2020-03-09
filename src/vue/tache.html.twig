@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+  - Gestion des taches
+{% endblock %}
+
+{% block contenu %}
+
+  <div class="textcenter">
+    <h1 class="text-purple">
+      Gestion des taches
+    </h1>
+
+  </div>
+
+  {% if form.valide is defined %}
+    {% if form.valide == true %}
+      <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+    {% else %}
+      <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+    {% endif %}
+  {% endif %}
+  <a class="btn btn-purple" href="index.php?page=tacheajout" role="button">Ajouter un taches</a>
+    <div class="table-responsive">
+      <br>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Intitulé de la tache</th>
+            <th scope="col">Nombre d'heure</th>
+            <th scope="col">Coup de la tache</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </thead>
+        <tfoot class="thead-light">
+          <tr>
+            <th scope="col">Intitulé de la tache</th>
+            <th scope="col">Nombre d'heure</th>
+            <th scope="col">Coup de la tache</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Effacer</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for t in liste %}
+            <tr>
+              <td scope="row" class="text-maj">{{t.libelle}}</td>
+              <td>{{t.nbHeure}}H</td>
+              <td>{{t.coupTache}}€</td>
+              <td>
+                <a href="index.php?page=tachemodif&id={{t.id}}">
+                  <i class="fas fa-pen"></i>
+                </a>
+              </td>
+              <td>
+                <a href="index.php?page=tache&id={{t.id}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% else %}
+            <tr class="textcenter">
+              <th scope="row" colspan="6">La table contrat ne contien aucune valeur.</th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+{% endblock %}
